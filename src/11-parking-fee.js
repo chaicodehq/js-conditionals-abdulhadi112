@@ -34,4 +34,39 @@
  */
 export function calculateParkingFee(hours, vehicleType) {
   // Your code here
+  if (hours <= 0) return -1
+
+  //hours ko round UP karna hai
+  // fees ko 30, 18 & 60 par cap karna hai
+  let roundedHr = Math.ceil(hours)
+  let parkingFee
+  switch (vehicleType) {
+    case 'car':
+      if (roundedHr == 1) {
+        parkingFee = 5
+      } else if (roundedHr > 1) {
+        parkingFee = 5 + ((roundedHr - 1) * 3)
+      }
+      return Math.min(parkingFee, 30)
+
+    case 'motorcycle':
+      if (roundedHr == 1) {
+        parkingFee = 3
+      } else if (roundedHr > 1) {
+        parkingFee = 3 + ((roundedHr - 1) * 2)
+      }
+      return Math.min(parkingFee, 18)
+
+    case 'bus':
+      if (roundedHr == 1) {
+        parkingFee = 10
+      } else if (roundedHr > 1) {
+        parkingFee = 10 + ((roundedHr - 1) * 7)
+      }
+      return Math.min(parkingFee, 60)
+
+
+    default:
+      return -1
+  }
 }
